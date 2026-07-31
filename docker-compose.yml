@@ -18,6 +18,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    networks:
+      - tracksaas-net
 
   backend:
     build:
@@ -50,6 +52,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - tracksaas-net
 
   frontend:
     build:
@@ -69,6 +73,15 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - tracksaas-net
+      - dokploy-network
+
+networks:
+  tracksaas-net:
+    driver: bridge
+  dokploy-network:
+    external: true
 
 volumes:
   postgres_data:
