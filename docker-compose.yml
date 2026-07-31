@@ -65,11 +65,6 @@ services:
     restart: unless-stopped
     ports:
       - "${FRONTEND_PORT:-8089}:80"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.tracksaas-frontend.rule=Host(`licencia.sekaitech.com.pe`)"
-      - "traefik.http.routers.tracksaas-frontend.entrypoints=web,websecure"
-      - "traefik.http.services.tracksaas-frontend.loadbalancer.server.port=80"
     depends_on:
       backend:
         condition: service_healthy
