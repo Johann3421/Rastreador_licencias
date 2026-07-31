@@ -62,6 +62,12 @@ services:
       args:
         VITE_API_URL: ${VITE_API_URL}
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tracksaas-frontend.rule=Host(`licencia.sekaitech.com.pe`)"
+      - "traefik.http.routers.tracksaas-frontend.entrypoints=websecure"
+      - "traefik.http.routers.tracksaas-frontend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.tracksaas-frontend.loadbalancer.server.port=80"
     ports:
       - "${FRONTEND_PORT:-8089}:80"
     depends_on:
