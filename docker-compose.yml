@@ -62,22 +62,17 @@ services:
       args:
         VITE_API_URL: ${VITE_API_URL}
     restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.tracksaas-frontend.rule=Host(`licencia.sekaitech.com.pe`)"
-      - "traefik.http.routers.tracksaas-frontend.entrypoints=websecure"
-      - "traefik.http.routers.tracksaas-frontend.tls.certresolver=letsencrypt"
-      - "traefik.http.services.tracksaas-frontend.loadbalancer.server.port=80"
     ports:
       - "${FRONTEND_PORT:-8089}:80"
     depends_on:
       backend:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost/ || exit 1"]
+      test: ["CMD-SHELL", "nc -z 127.0.0.1 80 || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 15s
     networks:
       - tracksaas-net
       - dokploy-network
