@@ -24,11 +24,9 @@ RUN npm run build
 # ── Stage 3: servidor estático de producción (Nginx) ──────────────────────────
 FROM nginx:1.27-alpine AS runner
 
-# Elimina la configuración por defecto de Nginx
-RUN rm /etc/nginx/conf.d/default.conf
-
 # Configuración personalizada: sirve el bundle y redirige /api al backend
-COPY nginx.conf /etc/nginx/conf.d/tracksaas.conf
+# Se nombra default.conf para que el script de IPv6 de nginx:alpine lo encuentre
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copia el bundle compilado
 COPY --from=builder /app/dist /usr/share/nginx/html
