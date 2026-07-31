@@ -64,7 +64,7 @@ services:
     container_name: tracksaas-frontend
     restart: unless-stopped
     ports:
-      - "${FRONTEND_PORT:-8080}:80"
+      - "${FRONTEND_PORT:-8089}:80"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.tracksaas-frontend.rule=Host(`licencia.sekaitech.com.pe`)"
