@@ -61,7 +61,6 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_API_URL: ${VITE_API_URL}
-    container_name: tracksaas-frontend
     restart: unless-stopped
     ports:
       - "${FRONTEND_PORT:-8089}:80"
