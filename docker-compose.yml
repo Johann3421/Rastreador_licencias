@@ -54,6 +54,7 @@ services:
       retries: 5
     networks:
       - tracksaas-net
+      - dokploy-network
 
   frontend:
     build:
